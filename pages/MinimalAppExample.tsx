@@ -7,13 +7,13 @@ export const MinimalAppExample = () => {
     },
   })
   const { register, setValue } = methods
-  function handleClearSelectValue() {
+  function handleChangeValue() {
     setValue('selectValue', '1')
   }
 
   return (
     <>
-      <button data-test="clear-select" onClick={handleClearSelectValue}>
+      <button data-test="clear-select" onClick={handleChangeValue}>
         Clear
       </button>
       <select
