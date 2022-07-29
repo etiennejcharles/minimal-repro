@@ -3,5 +3,5 @@
 In your terminal, run the following command:
 
 ```bash
-npm run test
+npm install && npm run test
 ```
