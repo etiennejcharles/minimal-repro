@@ -1,14 +1,22 @@
+import { MinimalAppExample } from '@/pages/MinimalAppExample'
 import { render, screen } from '@testing-library/react'
-import Home from '@/pages/index'
+import userEvent from '@testing-library/user-event'
 
 describe('Home', () => {
-  it('renders a heading', () => {
-    render(<Home />)
+  test('Should show the clear button with no warnings', async () => {
+    const { user } = setup(<MinimalAppExample />)
 
-    const heading = screen.getByRole('heading', {
-      name: /welcome to next\.js!/i,
-    })
+    await user.selectOptions(screen.getByRole('combobox'), 'custom')
 
-    expect(heading).toBeInTheDocument()
+    await user.click(screen.getByTestId('clear-select'))
+
+    expect(screen.getByRole('combobox')).toHaveDisplayValue(['A'])
   })
 })
+
+function setup(jsx, options) {
+  return {
+    user: userEvent.setup(options),
+    ...render(jsx),
+  }
+}
